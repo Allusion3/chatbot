@@ -40,8 +40,8 @@ The **@Service** class receives the request from the @Controller, understands wh
 ---
 The **@Repository** annotation in Spring is like the storage room at the lemonade stand where all the ingredients (lemons, sugar, and water) are kept. Here's how it works:
 
-
 The **@Repository** class is responsible for interacting with the database (or storage) to get or save data.
 It provides the service with the ingredients it needs to do its job (like giving lemons, sugar, and water to the person making lemonade).
 It also stores any leftover or new data back into the database (like putting unused lemons back in storage).
+
 ---
