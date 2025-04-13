@@ -5,7 +5,8 @@
 </head>
 <body>
 <h2>GenAI Chatbot</h2>
-<textarea id="userMessage" rows="4" cols="50" placeholder="Ask something..."></textarea>
+
+<textarea id="userMessage" rows="4" cols="50" placeholder="Type your message..."></textarea>
 <br><br>
 <button onclick="sendMessage()">Send</button>
 
@@ -25,7 +26,9 @@
         });
 
         const data = await response.json();
-        document.getElementById("botResponse").innerText = data.response;
+
+        // Show only the assistant's reply content
+        document.getElementById("botResponse").innerText = data.content;
     }
 </script>
 </body>

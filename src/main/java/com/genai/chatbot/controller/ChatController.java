@@ -1,6 +1,7 @@
 package com.genai.chatbot.controller;
 
 import com.genai.chatbot.model.ChatRequest;
+import com.genai.chatbot.model.SimpleChatResponse;
 import com.genai.chatbot.services.OpenAiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,10 +20,8 @@ public class ChatController {
     private OpenAiService openAiService;
 
     @PostMapping
-    public Map<String, String> chat(@RequestBody ChatRequest request) {
-      String reply = openAiService.getReply(request.getMessage());
-      return Map.of("response", reply);
-
+    public SimpleChatResponse chat(@RequestBody ChatRequest request) {
+        return openAiService.getReply(request.getMessage());
     }
 
 }
