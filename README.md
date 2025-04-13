@@ -10,10 +10,10 @@
 ---
 The **@Controller** annotation in Spring is like the person at the lemonade stand who takes orders from customers. Here's how it works:
 
-
 The **@Controller** class is responsible for handling requests from users (like customers placing orders).
 It listens for specific instructions (HTTP requests) and decides what to do next.
 It passes the work to the @Service class (the one that "makes the lemonade") and then gives the result back to the user (like handing over the lemonade).
+
 ---
 
 ## Service
