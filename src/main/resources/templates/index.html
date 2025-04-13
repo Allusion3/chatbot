@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>GenAI Chatbot</title>
+</head>
+<body>
+<h2>GenAI Chatbot</h2>
+<textarea id="userMessage" rows="4" cols="50" placeholder="Ask something..."></textarea>
+<br><br>
+<button onclick="sendMessage()">Send</button>
+
+<h3>Response:</h3>
+<pre id="botResponse"></pre>
+
+<script>
+    async function sendMessage() {
+        const message = document.getElementById("userMessage").value;
+
+        const response = await fetch("/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ message })
+        });
+
+        const data = await response.json();
+        document.getElementById("botResponse").innerText = data.response;
+    }
+</script>
+</body>
+</html>
