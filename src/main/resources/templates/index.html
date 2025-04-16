@@ -12,18 +12,19 @@
     <h1>GenAI Car Detailing Assistant</h1>
 </header>
 
-<div id="chat-container" class="chat-box">
+<main class="chat-container">
+    <div id="chat-box" class="chat-box"></div>
+
     <form id="chat-form" class="input-area">
         <select id="mode-select">
             <option value="general">General Detailing Questions</option>
             <option value="sms">SMS Reply</option>
             <option value="mentor">Mentor</option>
         </select>
-
         <input type="text" id="message-input" placeholder="Type your message..." />
         <button id="send-btn" type="submit">Send</button>
     </form>
-</div>
+</main>
 
 <script src="/script.js"></script>
 </body>

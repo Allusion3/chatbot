@@ -137,3 +137,9 @@ body {
     height: 50px; /* Set a larger height */
 }
 
+.typing-indicator {
+    margin: 10px;
+    font-style: italic;
+    color: #888;
+    font-size: 14px;
+}

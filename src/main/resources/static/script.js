@@ -1,57 +1,65 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('chat-form');
-    const messageInput = document.getElementById('message-input');
-    const modeSelect = document.getElementById('mode-select');
-    const chatContainer = document.getElementById('chat-container');
-    const typingIndicator = document.getElementById('typing-indicator');
+    const input = document.getElementById('message-input');
+    const mode = document.getElementById('mode-select');
+    const chatBox = document.getElementById('chat-box');
 
-    form.addEventListener('submit', async function (e) {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const message = messageInput.value.trim();
-        const mode = modeSelect.value;
+        const userText = input.value.trim();
+        if (!userText) return;
 
-        if (!message) return;
-
-        // Append user message
-        appendMessage('You', message);
-
-        // Clear input
-        messageInput.value = '';
+        appendMessage('You', userText);
+        input.value = '';
+        showTyping();
 
         try {
-            const response = await fetch('/chat', {
+            const res = await fetch('/chat', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    message: message,
-                    mode: mode
+                    message: userText,
+                    mode: mode.value
                 })
             });
 
-            const data = await response.json();
-            appendMessage('Assistant', data.response, mode);
-        } catch (error) {
-            appendMessage('Assistant', 'Error: Unable to fetch response', mode);
+            const data = await res.json();
+            removeTyping();
+            appendMessage(getAssistantLabel(mode.value), data.response);
+        } catch (err) {
+            removeTyping();
+            appendMessage('Error', 'Something went wrong.');
         }
     });
 
-    function appendMessage(sender, text, mode = null) {
-        const messageDiv = document.createElement('div');
-        messageDiv.classList.add('message');
+    function appendMessage(sender, text) {
+        const div = document.createElement('div');
+        div.className = 'message';
+        div.innerHTML = `<strong>${sender}:</strong> ${text}`;
+        chatBox.appendChild(div);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
 
-        let displayName = sender;
-        if (sender === 'Assistant' && mode) {
-            if (mode === 'sms') displayName = 'SMS Assistant';
-            else if (mode === 'mentor') displayName = 'Mentor';
-            else displayName = 'Detailing Assistant';
+    function getAssistantLabel(mode) {
+        switch (mode) {
+            case 'sms': return 'SMS Assistant';
+            case 'mentor': return 'Mentor Assistant';
+            default: return 'Detailing Assistant';
         }
+    }
 
-        const content = `<strong>${displayName}:</strong> ${text}`;
-        messageDiv.innerHTML = content;
-        chatContainer.appendChild(messageDiv);
-        chatContainer.scrollTop = chatContainer.scrollHeight;
+    function showTyping() {
+        const typingDiv = document.createElement('div');
+        typingDiv.id = 'typing';
+        typingDiv.className = 'message';
+        typingDiv.innerHTML = `<em>Assistant is typing...</em>`;
+        chatBox.appendChild(typingDiv);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function removeTyping() {
+        const typingDiv = document.getElementById('typing');
+        if (typingDiv) typingDiv.remove();
     }
 });
