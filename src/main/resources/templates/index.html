@@ -1,35 +1,30 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-    <title>GenAI Chatbot</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>GenAI Car Detailing Assistant</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 <body>
-<h2>GenAI Chatbot</h2>
+<header class="app-header">
+    <h1>GenAI Car Detailing Assistant</h1>
+</header>
 
-<textarea id="userMessage" rows="4" cols="50" placeholder="Type your message..."></textarea>
-<br><br>
-<button onclick="sendMessage()">Send</button>
+<div id="chat-container" class="chat-box">
+    <form id="chat-form" class="input-area">
+        <select id="mode-select">
+            <option value="general">General Detailing Questions</option>
+            <option value="sms">SMS Reply</option>
+            <option value="mentor">Mentor</option>
+        </select>
 
-<h3>Response:</h3>
-<pre id="botResponse"></pre>
+        <input type="text" id="message-input" placeholder="Type your message..." />
+        <button id="send-btn" type="submit">Send</button>
+    </form>
+</div>
 
-<script>
-    async function sendMessage() {
-        const message = document.getElementById("userMessage").value;
-
-        const response = await fetch("/chat", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ message })
-        });
-
-        const data = await response.json();
-
-        // Show only the assistant's reply content
-        document.getElementById("botResponse").innerText = data.content;
-    }
-</script>
+<script src="/script.js"></script>
 </body>
 </html>

@@ -15,11 +15,11 @@ public class OpenAiService {
 
     private static final String ENDPOINT = "https://api.openai.com/v1/chat/completions";
 
-    public SimpleChatResponse getReply(String message) {
+    public SimpleChatResponse getReply(String message, String mode) {
         OkHttpClient client = new OkHttpClient();
 
         // Build JSON payload using your util class
-        JSONObject payload = OpenAiChatRequestBuilder.buildChatRequest(message);
+        JSONObject payload = OpenAiChatRequestBuilder.buildChatRequest(message, mode);
 
         Request request = new Request.Builder()
                 .url("https://api.openai.com/v1/chat/completions")

@@ -20,8 +20,9 @@ public class ChatController {
     private OpenAiService openAiService;
 
     @PostMapping
-    public SimpleChatResponse chat(@RequestBody ChatRequest request) {
-        return openAiService.getReply(request.getMessage());
+    public Map<String, String> chat(@RequestBody ChatRequest request) {
+        SimpleChatResponse reply = openAiService.getReply(request.getMessage(), request.getMode());
+        return Map.of("response", reply.getContent());
     }
 
 }
