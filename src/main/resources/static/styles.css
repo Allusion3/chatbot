@@ -143,3 +143,54 @@ body {
     color: #888;
     font-size: 14px;
 }
+
+
+
+/* General Dark Mode Styles */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* Toggle Switch Styles */
+#dark-mode-toggle {
+    width: 50px;
+    height: 25px;
+    background: #ccc;
+    border-radius: 25px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+#dark-mode-toggle.dark {
+    background: #2563eb;
+}
+
+#dark-mode-toggle .toggle-circle {
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 2.5px;
+    left: 2.5px;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#dark-mode-toggle.dark .toggle-circle {
+    transform: translateX(25px);
+    background: #f4f4f4;
+}
+
+body.dark-mode #message-input {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
+}
+
+body.dark-mode #message-input::placeholder {
+    color: #aaa;
+}
